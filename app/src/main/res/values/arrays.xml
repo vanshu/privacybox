@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="imgsuffix">
+        <item>jpg</item>
+        <item>bmp</item>
+        <item>png</item>
+        <item>jpeg</item>
+        <item>gif</item>
+    </string-array>
+    <string-array name="videosuffix">
+        <item>avi</item>
+        <item>mpeg</item>
+        <item>mpg</item>
+        <item>mpe</item>
+        <item>mlv</item>
+        <item>vob</item>
+        <item>rm</item>
+        <item>ra</item>
+        <item>rmvb</item>
+        <item>mov</item>
+        <item>qt</item>
+        <item>asf</item>
+        <item>wmv</item>
+        <item>wmvhd</item>
+        <item>mkv</item>
+        <item>divx</item>
+        <item>xvid</item>
+        <item>mp4</item>
+        <item>m4v</item>
+        <item>3gp</item>
+        <item>flv</item>
+        <item>f4v</item>
+        <item>ogm</item>
+        <item>m2ts</item>
+        <item>mts</item>
+    </string-array>
+</resources>

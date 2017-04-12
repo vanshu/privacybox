@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/app_lock"
+        style="@style/FSButton_Style"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_light_green"
+        android:drawableLeft="@drawable/ic_privacy_lockapp" />
+
+    <Button
+        android:id="@+id/photo_lock"
+        style="@style/FSButton_Style"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_light_gray"
+        android:drawableLeft="@drawable/ic_privacy_photo" />
+
+    <Button
+        android:id="@+id/video_lock"
+        style="@style/FSButton_Style"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_light_purple"
+        android:drawableLeft="@drawable/ic_privacy_video" />
+
+    <Button
+        android:id="@+id/file_lock"
+        style="@style/FSButton_Style"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_brown"
+        android:drawableLeft="@drawable/ic_privacy_files" />
+
+</LinearLayout>

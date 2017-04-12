@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_nfc"
+        style="@style/FSButton_Style"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_light_green"
+        android:drawableLeft="@drawable/ic_nfc"
+        android:text="@string/nfc_unlock" />
+
+    <Button
+        android:id="@+id/btn_wearable"
+        style="@style/FSButton_Style"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_light_gray"
+        android:drawableLeft="@drawable/ic_wearable"
+        android:text="@string/wearable_unlock"
+        android:visibility="gone"></Button>
+
+    <Button
+        android:id="@+id/btn_dialphone"
+        style="@style/FSButton_Style"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_light_purple"
+        android:drawableLeft="@drawable/ic_dial_phone"
+        android:text="@string/dialphone_unlock"
+        android:visibility="gone"></Button>
+
+    <Button
+        android:id="@+id/btn_nosetting"
+        style="@style/FSButton_Style"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_brown"
+        android:drawableLeft="@drawable/ic_no_setting"
+        android:text="@string/no_setting"></Button>
+
+</LinearLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">私密盒子</string>
+
+    <!-- generic basic string -->
+
+    <string name="encryption">加密</string>
+    <string name="check_all">全选</string>
+    <string name="decryption">解密</string>
+    <string name="delete"> 删除</string>
+    <string name="inverse">反选</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="generic_loading">加载中 ...</string>
+    <string name="Privacy_lock_MainName">程序锁</string>
+    <string name="Privacy_lock_MainPrompt">欢迎使用私密盒子</string>
+    <string name="Privacy_lock_promptGraphReset">请绘制新的解锁图案</string>
+    <string name="Privacy_lock_promptGraphResetConfirm">再次绘制图案以确认</string>
+    <string name="Privacy_lock_promptGraphResetOk">解锁图案设置成功</string>
+    <string name="Privacy_lock_promptGraphLogin">请绘制解锁图案</string>
+    <string name="Privacy_lock_promptGraphTipNormal">用任意顺序连接屏幕上至少4个点</string>
+    <string name="Privacy_lock_promptGraphTipShort">解锁图案过于简单</string>
+    <string name="Privacy_lock_promptGraphTipNotConfirm">两次图案不一致，请再次绘制</string>
+    <string name="Privacy_lock_promptGraphTipFailed">解锁失败，请重新绘制</string>
+    <string name="Privacy_lock_promptGraphTipAgain"> 重新设定解锁图案</string>
+
+    <string name="Privacy_lock_promptGraphFailed">%1$d次解锁失败，请在%2$d秒后重试</string>
+    <string name="Privacy_lock_Settings">设置</string>
+    <string name="Privacy_lock_Settings_Unlock">解锁设置</string>
+    <string name="Privacy_lock_Settings_ResetGraph">图形锁密码修改</string>
+    <string name="Privacy_lock_Settings_HapticEnable">图形解锁时震动</string>
+    <string name="Privacy_lock_Settings_LevelLow">请务必记住图形锁,忘记后无法找回</string>
+    <string name="Privacy_Lock__None">暂无可加锁应用</string>
+    <string name="File_Lock_OldDb">旧数据发现</string>
+    <string name="File_Lock_OldDb_Exist">您的SD卡(%1$s)中存有旧的加密数据，请问您要导入还是清空？</string>
+    <string name="File_Lock_Import_OK">导入成功</string>
+    <string name="File_Lock_Import_Password">导入SD卡中加密数据，需输入加密数据的原始密码。</string>
+    <string name="File_Lock_Cleaning">正在清空SD卡旧数据</string>
+    <string name="File_Lock_Destroy">您确定要销毁选中的文件吗？</string>
+    <string name="File_Lock_OldDb_Import">导入</string>
+    <string name="File_Lock_OldDb_Clear">清空</string>
+    <string name="File_Lock_Cancel_Edit">取消编辑</string>
+    <string name="File_Lock_AddPhoto">添加图片</string>
+    <string name="File_Lock_AddVideo">添加视频</string>
+    <string name="File_Lock_AddFile">添加文件</string>
+    <string name="select_photo">选择图片</string>
+    <string name="select_video">选择视频</string>
+    <string name="select_file">选择文件</string>
+    <string name="no_photo">没有图片</string>
+    <string name="no_video">没有视频</string>
+    <string name="no_file">没有文件</string>
+    <string name="File_Lock_ChooseFileFirst">请先选择文件</string>
+    <string name="delete_select_file">已删除%1$d个文件</string>
+    <string name="file_delete_already">文件已删除</string>
+    <string name="file_encryption">文件加密</string>
+    <string name="picture_encryption">图片加密</string>
+    <string name="video_encryption"> 视频加密</string>
+    <string name="please_add_encryption_file">您还没有添加私密文件</string>
+    <string name="please_add_encryption_picture">您还没有添加私密图片</string>
+    <string name="please_add_encryption_video">您还没有添加私密视频</string>
+    <string name="stardard_sdcard"> 标准存储卡</string>
+    <string name="plug_sdcard_info">请插入SD卡</string>
+    <string name="stop_scan">停止扫描</string>
+    <string name="encrypting">正在加密</string>
+    <string name="decrypting">正在解密</string>
+    <string name="decrypting_temp"> 正在临时解密</string>
+    <string name="preview_video">正在准备视频</string>
+    <string name="encryption_success_fail_toast">已成功加密%1$d个文件，%2$d个文件加密失败</string>
+    <string name="encryption_success_toast">已成功加密%1$d个文件</string>
+    <string name="decryption_success_fail_toast">已成功解密%1$d个文件，%2$d个文件解密失败</string>
+    <string name="decryption_success_toast">已成功解密%1$d个文件</string>
+
+
+    <!-- GuideActivity -->
+    <string name="nfc_unlock">NFC解锁</string>
+    <string name="dialphone_unlock"> 拨号解锁</string>
+    <string name="wearable_unlock"> 穿戴式设备解锁</string>
+    <string name="no_setting">暂不设置</string>
+    <!-- NFCGuideActivity -->
+    <string name="hide_launcher_tips"> 自动隐藏桌面图标，通过NFC标签唤起进入程序</string>
+    <string name="nfc_unlock_tips1">请将NFC标签贴近手机</string>
+    <string name="nfc_unlock_tips2">请再次将NFC标签贴近手机</string>
+    <string name="nfc_unlock_success"> NFC解锁设置成功!</string>
+    <string name="nfc_unlock_fail">两次标签设置不一样.</string>
+    <string name="cellphone_unsupport_nfc">您的手机不支持NFC</string>
+    <string name="open_nfc_function_tips">请进入系统设置，打开NFC功能</string>
+
+    <!-- MainActivity -->
+
+    <string name="app_protect_count">保护%1$d款应用</string>
+    <string name="photo_encryption_count">加密%d张图片</string>
+    <string name="video_encryption_count">加密%d个视频</string>
+    <string name="file_encryption_count">加密%d个文件</string>
+
+</resources>

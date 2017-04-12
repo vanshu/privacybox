@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_selector_background">
+
+    <RelativeLayout
+        android:id="@+id/thumbnail_container"
+        android:layout_width="98dip"
+        android:layout_height="98dip"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ic_folder_background">
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <LinearLayout
+            android:id="@+id/folderinfo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#40000000"
+            android:orientation="vertical"
+            android:paddingLeft="5dip"
+            android:paddingRight="1dip">
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/TextAppearance.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:shadowColor="#00000000"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:singleLine="true"
+                android:text="DCIM"
+                android:textColor="@color/textcolor_white" />
+
+            <TextView
+                android:id="@+id/filecount"
+                style="@style/TextAppearance.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:shadowColor="#00000000"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:singleLine="true"
+                android:text="(80张)"
+                android:textColor="@color/textcolor_white" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_play" />
+    </RelativeLayout>
+
+    <CheckBox
+        android:id="@+id/selected"
+        style="@style/CompoundButton.CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/thumbnail_container"
+        android:layout_alignTop="@id/thumbnail_container"
+        android:clickable="false"
+        android:focusable="false" />
+
+    <TextView
+        android:id="@+id/filename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/thumbnail_container"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="filename"
+        android:textColor="@color/textcolor_black" />
+
+</RelativeLayout>

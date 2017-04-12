@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="166dp"
+                android:layout_height="166dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_nfc_badge" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/nfc_unlock"
+                android:textColor="@color/textcolor_gray"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="17dp"
+                android:layout_marginTop="17dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_nfcsetting1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_nfcsetting"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/iv_progress1"
+                    android:layout_width="60dp"
+                    android:layout_height="14dp"
+                    android:layout_marginBottom="24.5dp"
+                    android:layout_marginTop="24.5dp"
+                    android:background="@drawable/ic_nfcsetting_line"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/iv_nfcsetting2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_nfcsetting"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/iv_progress2"
+                    android:layout_width="60dp"
+                    android:layout_height="14dp"
+                    android:layout_marginBottom="24.5dp"
+                    android:layout_marginTop="24.5dp"
+                    android:background="@drawable/ic_nfcsetting_line"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/iv_nfcsetted"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_nfcsetted"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_nfcsetting_tips"
+                style="@style/TextAppearance.Medium"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+            <CheckBox
+
+                android:id="@+id/ck_hide_lanucher"
+                style="@style/CompoundButton.CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:checked="true"
+                android:gravity="center"
+                android:text="@string/hide_launcher_tips" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_bottom"
+        style="@style/Button.Dialog.Cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Privacy Box</string>
+    <!-- generic basic string -->
+    <string name="encryption">Encrypt</string>
+    <string name="check_all">Check all</string>
+    <string name="decryption">Decrypt</string>
+    <string name="delete">Delete</string>
+    <string name="inverse">Inverse</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="generic_loading">Loading ...</string>
+    <string name="Privacy_lock_MainName">App Locker</string>
+    <string name="Privacy_lock_MainPrompt">Welcome to Privacy Box</string>
+    <string name="Privacy_lock_promptGraphReset">Draw new pattern to unlock</string>
+    <string name="Privacy_lock_promptGraphResetConfirm">Redraw pattern to confirm</string>
+    <string name="Privacy_lock_promptGraphResetOk">set pattern successfully</string>
+    <string name="Privacy_lock_promptGraphLogin">Draw pattern to unlock</string>
+    <string name="Privacy_lock_promptGraphTipNormal">Draw pattern to unlock </string>
+    <string name="Privacy_lock_promptGraphTipShort">Connect at least 4 dots.Try again...</string>
+    <string name="Privacy_lock_promptGraphTipNotConfirm">Two patterns are inconsistent, please draw again</string>
+    <string name="Privacy_lock_promptGraphTipFailed">Unlock failed, please draw again</string>
+    <string name="Privacy_lock_promptGraphTipAgain">Reset pattern</string>
+    <string name="Privacy_lock_promptGraphFailed">%1$d times fails, wait  %2$d seconds..</string>
+    <string name="Privacy_lock_Settings">Setting</string>
+    <string name="Privacy_lock_Settings_Unlock">Unlock Setting</string>
+    <string name="Privacy_lock_Settings_ResetGraph">Change pattern</string>
+    <string name="Privacy_lock_Settings_HapticEnable">Pattern Haptic</string>
+    <string name="Privacy_lock_Settings_LevelLow">Please remember your pattern password</string>
+    <string name="Privacy_Lock__None">Temporary no lock application</string>
+    <string name="File_Lock_OldDb">Old data discovery</string>
+    <string name="File_Lock_OldDb_Exist">SDCard ((%1$s)) found your have previous data，import or delete ?</string>
+    <string name="File_Lock_Import_OK">Import Success</string>
+    <string name="File_Lock_Import_Password">Import your previous data,We need your origin pattern password</string>
+    <string name="File_Lock_Cleaning">Delete old data in SDCard</string>
+    <string name="File_Lock_Destroy">delete select files？</string>
+    <string name="File_Lock_OldDb_Import">Import</string>
+    <string name="File_Lock_OldDb_Clear">Clear</string>
+    <string name="File_Lock_Cancel_Edit">Cancel Edit</string>
+    <string name="File_Lock_AddPhoto">Add Photo</string>
+    <string name="File_Lock_AddVideo">Add Video</string>
+    <string name="File_Lock_AddFile">Add File</string>
+    <string name="select_photo">Choose Photo</string>
+    <string name="select_video">Choose Video</string>
+    <string name="select_file">Choose File</string>
+    <string name="no_photo">No Photos</string>
+    <string name="no_video">No Videos</string>
+    <string name="no_file">No Files</string>
+    <string name="File_Lock_ChooseFileFirst">Choose File First</string>
+    <string name="delete_select_file">delete %1$d files</string>
+    <string name="file_delete_already">delete successfully</string>
+    <string name="file_encryption">File Encryption</string>
+    <string name="picture_encryption">Photo Encryption</string>
+    <string name="video_encryption">Video Encryption</string>
+    <string name="please_add_encryption_file">No Data</string>
+    <string name="please_add_encryption_picture">No Data</string>
+    <string name="please_add_encryption_video">No Data</string>
+    <string name="stardard_sdcard"> SDCard</string>
+    <string name="plug_sdcard_info">Please plug SD card</string>
+    <string name="stop_scan">Stop Scan</string>
+    <string name="encrypting">Encrypting</string>
+    <string name="decrypting">Decrypting</string>
+    <string name="decrypting_temp">Decrypting</string>
+    <string name="preview_video">Preview </string>
+    <string name="encryption_success_fail_toast">encrypt %1$d files successfully，%2$d files fail</string>
+    <string name="encryption_success_toast">encrypt %1$d files successfully</string>
+    <string name="decryption_success_fail_toast">decrypt %1$d files successfully, %2$d files fail</string>
+    <string name="decryption_success_toast">decrypt %1$d files successfully</string>
+    <!-- GuideActivity -->
+    <string name="nfc_unlock">NFC Unlock</string>
+    <string name="dialphone_unlock"> DialPhone Unlock</string>
+    <string name="wearable_unlock">Wearable Unlock</string>
+    <string name="no_setting">Not Setting Now</string>
+    <!-- NFCGuideActivity -->
+    <string name="hide_launcher_tips">Hide your launcher icon,use nfc tag tap into PrivacyBox</string>
+    <string name="nfc_unlock_tips1">Use NFC tag tap to your phone</string>
+    <string name="nfc_unlock_tips2">tap again</string>
+    <string name="nfc_unlock_success">Set NFC Unlock successful!</string>
+    <string name="nfc_unlock_fail">Two NFC Tag dismatch.</string>
+    <string name="cellphone_unsupport_nfc">Your phone does not support NFC</string>
+    <string name="open_nfc_function_tips">Enter settings, open the NFC function</string>
+    <!-- MainActivity -->
+    <string name="app_protect_count">Locked %1$d apps</string>
+    <string name="photo_encryption_count">Encyrpt %d Photos</string>
+    <string name="video_encryption_count">Encyrpt %d Videos</string>
+    <string name="file_encryption_count">Encyrpt %d Files</string>
+
+</resources>

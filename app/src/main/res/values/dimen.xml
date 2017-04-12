@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="page_padding">10px</dimen>
+    <dimen name="action_bar_height">48dp</dimen>
+    <dimen name="action_bar_bottom_height">48dip</dimen>
+    <dimen name="action_bar_left_padding">8dip</dimen>
+    <dimen name="inside_side_right_padding_one">8dip</dimen>
+    <dimen name="view_left_padding">12dip</dimen>
+    <dimen name="file_item_padding">10dip</dimen>
+    <dimen name="inside_side_left_padding_one">8dip</dimen>
+</resources>

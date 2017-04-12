@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/actionbar"
+        style="@style/PrivacyBox_AcionBarStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/actionbar_homeasup_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="23dp"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:clickable="false"
+                android:contentDescription="@string/app_name"
+                android:focusable="false"
+                android:src="@drawable/btn_homeasup" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/logo" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tip"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/page_padding"
+            android:text="this is tips"
+            android:textAppearance="@style/TextAppearance.Medium" />
+
+        <com.mobimvp.privacybox.ui.widgets.LockPatternView
+            android:id="@+id/pattern"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/page_padding" />
+
+        <LinearLayout
+            android:id="@+id/cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/action_bar_bottom_height"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_red"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:visibility="invisible">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/Privacy_lock_promptGraphTipAgain"
+                android:textAppearance="@style/TextAppearance.Title" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

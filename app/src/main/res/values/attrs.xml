@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="WeightedLinearLayout">
+        <attr name="majorWeight" format="float" />
+        <attr name="minorWeight" format="float" />
+    </declare-styleable>
+    <!-- The set of attributes that describe a AlertDialog's theme. -->
+    <declare-styleable name="AlertDialog">
+        <attr name="fullDark" format="reference|color" />
+        <attr name="topDark" format="reference|color" />
+        <attr name="centerDark" format="reference|color" />
+        <attr name="bottomDark" format="reference|color" />
+        <attr name="fullBright" format="reference|color" />
+        <attr name="topBright" format="reference|color" />
+        <attr name="centerBright" format="reference|color" />
+        <attr name="bottomBright" format="reference|color" />
+        <attr name="bottomMedium" format="reference|color" />
+        <attr name="centerMedium" format="reference|color" />
+    </declare-styleable>
+    <attr name="alertDialogStyle" format="reference" />
+</resources>

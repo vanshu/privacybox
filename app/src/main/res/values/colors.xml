@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="window_background_dark_transparent">#c0000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="textcolor_white">#ffffffff</color>
+    <color name="textcolor_black">#56595c</color>
+    <color name="textcolor_gray">#e2e2e2</color>
+    <color name="background">#fafafa</color>
+    <color name="light_green_default">#80c269</color>
+    <color name="light_green_pressed">#47a429</color>
+    <color name="light_gray_default">#607d8b</color>
+    <color name="light_gray_pressed">#526b77</color>
+    <color name="light_purple_default">#8d61da</color>
+    <color name="light_purple_pressed">#733ad8</color>
+    <color name="brown_pressed">#946225</color>
+    <color name="brown_default">#b07833</color>
+    <color name="red_default">#e84c3d</color>
+    <color name="red_pressed">#c1392b</color>
+    <color name="gray_default">#ecf0f1</color>
+    <color name="gray_pressed">#bec3c7</color>
+    <color name="divider_line">#e2e2e2</color>
+    <color name="grid_mediafile_bg">#d8e8e7</color>
+    <color name="blue">#605ce1</color>
+</resources>
