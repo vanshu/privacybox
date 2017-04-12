@@ -23,7 +23,6 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.util.AttributeSet;
-import android.util.FloatMath;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,7 +53,7 @@ public class TouchImageView extends ImageView {
     float saveScale = 1f;
     float minScale = 1f;
     float maxScale = 3f;
-    float oldDist = 1f;
+    double oldDist = 1f;
     PointF lastDelta = new PointF(0, 0);
     float velocity = 0;
     long lastPressTime = 0, lastDragTime = 0;
@@ -164,13 +163,13 @@ public class TouchImageView extends ImageView {
                             lastDelta.set(deltaX, deltaY);
                             last.set(curr.x, curr.y);
                         } else if (mode == ZOOM) {
-                            float newDist = spacing(event);
+                            double newDist = spacing(event);
                             if (rawEvent.getPointerCount() < 2) break;
                             //There is one serious trouble: when you scaling with two fingers, then pick up first finger of gesture, ACTION_MOVE being called.
                             //Magic number 50 for this case
                             if (10 > Math.abs(oldDist - newDist) || Math.abs(oldDist - newDist) > 50)
                                 break;
-                            float mScaleFactor = newDist / oldDist;
+                            double mScaleFactor = newDist / oldDist;
                             oldDist = newDist;
 
                             float origScale = saveScale;
@@ -185,7 +184,7 @@ public class TouchImageView extends ImageView {
 
                             calcPadding();
                             if (origWidth * saveScale <= width || origHeight * saveScale <= height) {
-                                matrix.postScale(mScaleFactor, mScaleFactor, width / 2, height / 2);
+                                matrix.postScale((float)mScaleFactor, (float)mScaleFactor, width / 2, height / 2);
                                 if (mScaleFactor < 1) {
                                     fillMatrixXY();
                                     if (mScaleFactor < 1) {
@@ -194,7 +193,7 @@ public class TouchImageView extends ImageView {
                                 }
                             } else {
                                 PointF mid = midPointF(event);
-                                matrix.postScale(mScaleFactor, mScaleFactor, mid.x, mid.y);
+                                matrix.postScale((float)mScaleFactor, (float)mScaleFactor, mid.x, mid.y);
                                 fillMatrixXY();
                                 if (mScaleFactor < 1) {
                                     if (matrixX < -right)
@@ -341,11 +340,11 @@ public class TouchImageView extends ImageView {
     /**
      * Determine the space between the first two fingers
      */
-    private float spacing(WrapMotionEvent event) {
+    private double spacing(WrapMotionEvent event) {
         // ...
         float x = event.getX(0) - event.getX(1);
         float y = event.getY(0) - event.getY(1);
-        return FloatMath.sqrt(x * x + y * y);
+        return Math.sqrt(x * x + y * y);
     }
 
     /**

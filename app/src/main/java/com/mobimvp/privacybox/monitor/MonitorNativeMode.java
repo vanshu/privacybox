@@ -1,4 +1,4 @@
-﻿package com.mobimvp.privacybox.monitor;
+package com.mobimvp.privacybox.monitor;
 
 import android.content.Context;
 import android.util.Log;
@@ -48,10 +48,6 @@ public class MonitorNativeMode implements MonitorInterface.PackageMonitor {
             InputStream inputstream;
             BufferedReader bufferedreader;
             try {
-                //radio — 查看缓冲区的相关的信息.
-                //events — 查看和事件相关的的缓冲区.
-                //main — 查看主要的日志缓冲区
-                //-c 清楚屏幕上的日志. -c只能放在最后输入 次序都不能颠倒
                 process = Runtime.getRuntime().exec("logcat -b events -c");
                 process.waitFor();
             } catch (Exception e) {
