@@ -5,8 +5,8 @@
     android:versionName="1.0.1">
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21" />
+        android:minSdkVersion="16"
+        android:targetSdkVersion="25" />
 
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.READ_LOGS" />  <!-- logcat -b events 所需要权限，不过4.1后非系统应用只能查询到自身log日志 -->

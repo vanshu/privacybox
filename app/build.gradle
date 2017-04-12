@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.mobimvp.privacybox"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 25
     }
 
