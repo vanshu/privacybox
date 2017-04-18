@@ -11,7 +11,7 @@ public class Constants {
     public static final String BROADCAST_LOCKSCREEN_APP = "msg_applock_screen";
     public static final String BROADCAST_LOCKSCREEN_FILE = "msg_filelock_screen";
     public static final String BROADCAST_LOCKSCREEN_PHOTO = "msg_imglock_screen";
-    public static final String BROADCAST_LOCKSCREEN_VEDIO = "msg_vediolock_screen";
+    public static final String BROADCAST_LOCKSCREEN_VIDEO = "msg_videolock_screen";
     // 记录NFCID号
     public static final String BROADCAST_NFC_ID = "broadcast_nfc_id";
     public static final String BROADCAST_UNLOCK_RETRY = "msg_retry_unlock";
