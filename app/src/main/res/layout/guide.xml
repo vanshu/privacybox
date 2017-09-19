@@ -22,7 +22,7 @@
         android:layout_weight="1"
         android:background="@drawable/btn_light_gray"
         android:drawableLeft="@drawable/ic_wearable"
-        android:visibility="gone"
+        android:visibility="visible"
         android:text="@string/wearable_unlock" >
     </Button>
 
@@ -34,7 +34,7 @@
         android:layout_weight="1"
         android:background="@drawable/btn_light_purple"
         android:drawableLeft="@drawable/ic_dial_phone"
-        android:visibility="gone"
+        android:visibility="visible"
         android:text="@string/dialphone_unlock" >
     </Button>
 

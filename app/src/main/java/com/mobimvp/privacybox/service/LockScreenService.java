@@ -24,9 +24,9 @@ import com.mobimvp.privacybox.ui.guide.GuideActivity;
 public class LockScreenService{
 	
 	public interface OnLockScreenFinish{
-		public void onUnlockFailed(int reason);
-		public void onUnlockSuccess();
-		public boolean onUnlockPassword(String password);
+		void onUnlockFailed(int reason);
+		void onUnlockSuccess();
+		boolean onUnlockPassword(String password);
 	}
 	
 	private WeakReference<OnLockScreenFinish> firstObserver;

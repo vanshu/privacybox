@@ -30,20 +30,20 @@ public class GuideActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.guide);
-//		getPrivacyActionBar().setLogo(R.drawable.logo);
-//		getPrivacyActionBar().setDisplayShowTitleEnabled(false);
-//		getPrivacyActionBar().setDisplayShowHomeEnabled(true);
-//		btnNfc = (Button) findViewById(R.id.btn_nfc);
-//		btnWearable = (Button) findViewById(R.id.btn_wearable);
-//		btnDialphone = (Button) findViewById(R.id.btn_dialphone);
-//		btnNosetting = (Button) findViewById(R.id.btn_nosetting);
-//		btnNfc.setOnClickListener(this);
-//		btnWearable.setOnClickListener(this);
-//		btnDialphone.setOnClickListener(this);
-//		btnNosetting.setOnClickListener(this);
-//		registerfinishActivity();
-		noSetting();
+		setContentView(R.layout.guide);
+		getPrivacyActionBar().setLogo(R.drawable.logo);
+		getPrivacyActionBar().setDisplayShowTitleEnabled(false);
+		getPrivacyActionBar().setDisplayShowHomeEnabled(true);
+		btnNfc = (Button) findViewById(R.id.btn_nfc);
+		btnWearable = (Button) findViewById(R.id.btn_wearable);
+		btnDialphone = (Button) findViewById(R.id.btn_dialphone);
+		btnNosetting = (Button) findViewById(R.id.btn_nosetting);
+		btnNfc.setOnClickListener(this);
+		btnWearable.setOnClickListener(this);
+		btnDialphone.setOnClickListener(this);
+		btnNosetting.setOnClickListener(this);
+		registerfinishActivity();
+//		noSetting();
 	}
 
 	@Override
