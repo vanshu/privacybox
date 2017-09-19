@@ -17,6 +17,11 @@
  */
 package com.mobimvp.privacybox.ui.widgets.ru.truba.touchgallery.GalleryWidget;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Parcelable;
@@ -34,168 +39,164 @@ import com.mobimvp.privacybox.ui.widgets.ru.truba.touchgallery.TouchView.TouchIm
 import com.mobimvp.privacybox.utility.BitmapUtility;
 import com.mobimvp.privacybox.utility.ImageWorker;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 /**
  * Class wraps URLs to adapter, then it instantiates <b>UrlTouchImageView</b>
  * objects to paging up through them.
  */
 public class EncryptedPagerAdapter extends PagerAdapter {
 
-    private List<EncryptItem> mResources;
-    private List<ViewHolder> mHolders;
-    private FileLocker mLock;
-    private EncryptedImageLoader mImageLoader;
-    private DisplayMetrics mDM;
-    private Context mContext;
-    private LayoutInflater mInflater;
+	private class EncryptedImageLoader extends ImageWorker {
 
-    public EncryptedPagerAdapter(Context context, DisplayMetrics dm, List<EncryptItem> resources) {
-        this.mResources = resources;
-        mHolders = new ArrayList<ViewHolder>();
-        for (int i = 0; i < mResources.size(); i++) {
-            mHolders.add(new ViewHolder());
-        }
-        this.mContext = context;
-        this.mDM = dm;
-        this.mLock = FileLocker.getInstance();
-        this.mImageLoader = new EncryptedImageLoader();
-        this.mImageLoader.setLoadingImage(R.drawable.progress_bar);
-        this.mInflater = LayoutInflater.from(mContext);
-    }
+		private int resizeSize;
 
-    public void recycle() {
-        this.mImageLoader.recycle();
-    }
+		public EncryptedImageLoader() {
+			super(mContext);
+			setImageFadeIn(false);
+			resizeSize = Math.max(mDM.widthPixels, mDM.heightPixels);
+		}
 
-    public void removeItem(int position) {
-        if (position < mResources.size())
-            mResources.remove(position);
-        if (position < mHolders.size())
-            mHolders.remove(position);
-        notifyDataSetChanged();
-    }
+		@Override
+		protected Bitmap processBitmap(Object data) {
+			final EncryptItem ei = (EncryptItem) data;
+			final CountDownLatch latch = new CountDownLatch(1);
+			FileLocker.OperateListener listener = new FileLocker.OperateListener() {
+				@Override
+				public void onSuccess(EncryptItem ei) {
+				}
 
-    @Override
-    public void setPrimaryItem(ViewGroup container, int position, Object object) {
-        super.setPrimaryItem(container, position, object);
-        ViewHolder holder = (ViewHolder) object;
-        ((GalleryViewPager) container).mCurrentView = holder.tiv;
-    }
+				@Override
+				public void onStart() {
+				}
 
-    @Override
-    public Object instantiateItem(View collection, int position) {
-        ViewHolder holder = mHolders.get(position);
-        holder.child = mInflater.inflate(R.layout.preview_item, null);
-        holder.tiv = (TouchImageView) holder.child.findViewById(R.id.image);
-        mImageLoader.loadImage(mResources.get(position), holder.tiv);
-        ((ViewPager) collection).addView(holder.child, 0);
-        return holder;
-    }
+				@Override
+				public void onProgress(EncryptItem ei, int progress) {
+				}
 
-    @Override
-    public void destroyItem(View collection, int position, Object object) {
-        ViewHolder holder = (ViewHolder) object;
-        ((ViewPager) collection).removeView(holder.child);
-        holder.child = null;
-        holder.tiv = null;
-    }
+				@Override
+				public void onFinish() {
+					latch.countDown();
+				}
 
-    @Override
-    public int getCount() {
-        return mResources.size();
-    }
+				@Override
+				public void onError(EncryptItem ei, int error) {
+				}
+			};
 
-    @Override
-    public boolean isViewFromObject(View view, Object object) {
-        ViewHolder holder = (ViewHolder) object;
-        return holder != null && view.equals(holder.child);
-    }
+			mLock.decryptTemp(ei, listener);
+			try {
+				latch.await();
+			} catch (Exception e) {
+			}
 
-    @Override
-    public int getItemPosition(Object object) {
-        for (int i = 0; i < mHolders.size(); i++) {
-            if (mHolders.get(i).equals(object)) {
-                return i;
-            }
-        }
-        return PagerAdapter.POSITION_NONE;
-    }
+			try {
+				return BitmapUtility.createThumbnail(new File(ei.getTempPath()), resizeSize);
+			} catch (Exception e) {
+				return null;
+			}
+		}
 
-    @Override
-    public void finishUpdate(View arg0) {
-    }
+	}
 
-    @Override
-    public void restoreState(Parcelable arg0, ClassLoader arg1) {
-    }
+	private static class ViewHolder {
+		public View child;
+		public TouchImageView tiv;
+	}
 
-    @Override
-    public Parcelable saveState() {
-        return null;
-    }
+	private List<EncryptItem> mResources;
+	private List<ViewHolder> mHolders;
+	private FileLocker mLock;
+	private EncryptedImageLoader mImageLoader;
+	private DisplayMetrics mDM;
 
-    @Override
-    public void startUpdate(View arg0) {
-    }
+	private Context mContext;
+	private LayoutInflater mInflater;
 
-    private static class ViewHolder {
-        public View child;
-        public TouchImageView tiv;
-    }
+	public EncryptedPagerAdapter(Context context, DisplayMetrics dm, List<EncryptItem> resources) {
+		this.mResources = resources;
+		mHolders = new ArrayList<ViewHolder>();
+		for (int i = 0; i < mResources.size(); i++) {
+			mHolders.add(new ViewHolder());
+		}
+		this.mContext = context;
+		this.mDM = dm;
+		this.mLock = FileLocker.getInstance();
+		this.mImageLoader = new EncryptedImageLoader();
+		this.mImageLoader.setLoadingImage(R.drawable.progress_bar);
+		this.mInflater = LayoutInflater.from(mContext);
+	}
 
-    private class EncryptedImageLoader extends ImageWorker {
+	public void recycle() {
+		this.mImageLoader.recycle();
+	}
+	
+	public void removeItem(int position) {
+		if(position < mResources.size())
+			mResources.remove(position);
+		if(position < mHolders.size())
+			mHolders.remove(position);
+		notifyDataSetChanged();
+	}
 
-        private int resizeSize;
+	@Override
+	public void setPrimaryItem(ViewGroup container, int position, Object object) {
+		super.setPrimaryItem(container, position, object);
+		ViewHolder holder = (ViewHolder) object;
+		((GalleryViewPager) container).mCurrentView = holder.tiv;
+	}
 
-        public EncryptedImageLoader() {
-            super(mContext);
-            setImageFadeIn(false);
-            resizeSize = Math.max(mDM.widthPixels, mDM.heightPixels);
-        }
+	@Override
+	public Object instantiateItem(View collection, int position) {
+		ViewHolder holder = mHolders.get(position);
+		holder.child = mInflater.inflate(R.layout.preview_item, null);
+		holder.tiv = (TouchImageView) holder.child.findViewById(R.id.image);
+		mImageLoader.loadImage(mResources.get(position), holder.tiv);
+		((ViewPager) collection).addView(holder.child, 0);
+		return holder;
+	}
 
-        @Override
-        protected Bitmap processBitmap(Object data) {
-            final EncryptItem ei = (EncryptItem) data;
-            final CountDownLatch latch = new CountDownLatch(1);
-            FileLocker.OperateListener listener = new FileLocker.OperateListener() {
-                @Override
-                public void onSuccess(EncryptItem ei) {
-                }
+	@Override
+	public void destroyItem(View collection, int position, Object object) {
+		ViewHolder holder = (ViewHolder) object;
+		((ViewPager) collection).removeView(holder.child);
+		holder.child = null;
+		holder.tiv = null;
+	}
 
-                @Override
-                public void onStart() {
-                }
+	@Override
+	public int getCount() {
+		return mResources.size();
+	}
 
-                @Override
-                public void onProgress(EncryptItem ei, int progress) {
-                }
+	@Override
+	public boolean isViewFromObject(View view, Object object) {
+		ViewHolder holder = (ViewHolder) object;
+		return holder != null && view.equals(holder.child);
+	}
 
-                @Override
-                public void onFinish() {
-                    latch.countDown();
-                }
+	@Override
+	public int getItemPosition(Object object) {
+		for (int i=0; i<mHolders.size(); i++) {
+			if (mHolders.get(i).equals(object)) {
+				return i;
+			}
+		}
+		return PagerAdapter.POSITION_NONE;
+	}
 
-                @Override
-                public void onError(EncryptItem ei, int error) {
-                }
-            };
+	@Override
+	public void finishUpdate(View arg0) {
+	}
 
-            mLock.decryptTemp(ei, listener);
-            try {
-                latch.await();
-            } catch (Exception e) {
-            }
+	@Override
+	public void restoreState(Parcelable arg0, ClassLoader arg1) {
+	}
 
-            try {
-                return BitmapUtility.createThumbnail(new File(ei.getTempPath()), resizeSize);
-            } catch (Exception e) {
-                return null;
-            }
-        }
+	@Override
+	public Parcelable saveState() {
+		return null;
+	}
 
-    }
+	@Override
+	public void startUpdate(View arg0) {
+	}
 }

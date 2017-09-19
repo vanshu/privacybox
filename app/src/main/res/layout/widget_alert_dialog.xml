@@ -9,13 +9,13 @@
     android:paddingRight="10dip"
     android:paddingTop="9dip"
     app:majorWeight="0.65"
-    app:minorWeight="1">
+    app:minorWeight="1" >
 
     <LinearLayout
         android:id="@+id/topPanel"
         android:layout_width="fill_parent"
         android:layout_height="48dip"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
         <LinearLayout
             android:id="@+id/title_template"
@@ -24,7 +24,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dip"
-            android:paddingRight="15dip">
+            android:paddingRight="15dip" >
 
             <ImageView
                 android:id="@+id/icon"
@@ -51,7 +51,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -60,7 +60,7 @@
             android:layout_marginBottom="20dip"
             android:layout_marginLeft="15dip"
             android:layout_marginRight="15dip"
-            android:layout_marginTop="20dip">
+            android:layout_marginTop="20dip" >
 
             <TextView
                 android:id="@+id/message"
@@ -74,7 +74,7 @@
         android:id="@+id/customPanel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1" >
 
         <FrameLayout
             android:id="@+id/custom"
@@ -87,7 +87,7 @@
         android:layout_width="fill_parent"
         android:layout_height="68dip"
         android:orientation="vertical"
-        android:paddingTop="20dip">
+        android:paddingTop="20dip" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -97,7 +97,7 @@
             android:paddingBottom="6dip"
             android:paddingLeft="8dip"
             android:paddingRight="8dip"
-            android:paddingTop="6dip">
+            android:paddingTop="6dip" >
 
             <Button
                 android:id="@+id/button1"

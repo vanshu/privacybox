@@ -65,14 +65,13 @@
     <string name="preview_video">Preview </string>
     <string name="encryption_success_fail_toast">encrypt %1$d files successfully，%2$d files fail</string>
     <string name="encryption_success_toast">encrypt %1$d files successfully</string>
-    <string name="decryption_success_fail_toast">decrypt %1$d files successfully, %2$d files fail</string>
-    <string name="decryption_success_toast">decrypt %1$d files successfully</string>
-    <!-- GuideActivity -->
+    <string name="decryption_success_fail_toast">decrypt %1$d files successfully, %2$d files fail</string>    <string name="decryption_success_toast">decrypt %1$d files successfully</string>
+ <!-- GuideActivity -->
     <string name="nfc_unlock">NFC Unlock</string>
     <string name="dialphone_unlock"> DialPhone Unlock</string>
     <string name="wearable_unlock">Wearable Unlock</string>
     <string name="no_setting">Not Setting Now</string>
-    <!-- NFCGuideActivity -->
+ <!-- NFCGuideActivity -->
     <string name="hide_launcher_tips">Hide your launcher icon,use nfc tag tap into PrivacyBox</string>
     <string name="nfc_unlock_tips1">Use NFC tag tap to your phone</string>
     <string name="nfc_unlock_tips2">tap again</string>
@@ -80,7 +79,7 @@
     <string name="nfc_unlock_fail">Two NFC Tag dismatch.</string>
     <string name="cellphone_unsupport_nfc">Your phone does not support NFC</string>
     <string name="open_nfc_function_tips">Enter settings, open the NFC function</string>
-    <!-- MainActivity -->
+       <!-- MainActivity -->
     <string name="app_protect_count">Locked %1$d apps</string>
     <string name="photo_encryption_count">Encyrpt %d Photos</string>
     <string name="video_encryption_count">Encyrpt %d Videos</string>

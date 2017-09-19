@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <declare-styleable name="WeightedLinearLayout">
+	
+	<declare-styleable name="WeightedLinearLayout">
         <attr name="majorWeight" format="float" />
         <attr name="minorWeight" format="float" />
     </declare-styleable>

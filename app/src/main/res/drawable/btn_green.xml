@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android" android:constantSize="true" android:dither="true" android:variablePadding="true">
-    <item android:drawable="@color/light_green_pressed" android:state_pressed="true" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:constantSize="true"
+    android:dither="true"
+    android:variablePadding="true" >
+    <item android:state_pressed="true" android:drawable="@color/light_green_pressed" />
     <item android:drawable="@color/light_green_default" />
 </selector>

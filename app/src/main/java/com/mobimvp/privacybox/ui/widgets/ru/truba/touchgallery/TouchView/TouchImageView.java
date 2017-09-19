@@ -23,25 +23,28 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.util.AttributeSet;
+import android.util.FloatMath;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
 public class TouchImageView extends ImageView {
 
+    private static final String TAG = "Touch";
+    // These matrices will be used to move and zoom image
+    Matrix matrix = new Matrix();
+    Matrix savedMatrix = new Matrix();
+
     static final long DOUBLE_PRESS_INTERVAL = 600;
     static final float FRICTION = 0.9f;
+
     // We can be in one of these 4 states
     static final int NONE = 0;
     static final int DRAG = 1;
     static final int ZOOM = 2;
     static final int CLICK = 10;
-    private static final String TAG = "Touch";
-    public boolean onLeftSide = false, onTopSide = false, onRightSide = false, onBottomSide = false;
-    // These matrices will be used to move and zoom image
-    Matrix matrix = new Matrix();
-    Matrix savedMatrix = new Matrix();
     int mode = NONE;
+
     float redundantXSpace, redundantYSpace;
     float right, bottom, origWidth, origHeight, bmWidth, bmHeight;
     float width, height;
@@ -50,15 +53,20 @@ public class TouchImageView extends ImageView {
     PointF start = new PointF();
     float[] m;
     float matrixX, matrixY;
+
     float saveScale = 1f;
     float minScale = 1f;
     float maxScale = 3f;
-    double oldDist = 1f;
+    float oldDist = 1f;
+
     PointF lastDelta = new PointF(0, 0);
     float velocity = 0;
+
     long lastPressTime = 0, lastDragTime = 0;
     boolean allowInert = false;
     Context context;
+
+    public boolean onLeftSide = false, onTopSide = false, onRightSide = false, onBottomSide = false;
 
     public TouchImageView(Context context) {
         super(context);
@@ -67,16 +75,16 @@ public class TouchImageView extends ImageView {
 
         init();
     }
-
-    public TouchImageView(Context context, AttributeSet attrs) {
+    public TouchImageView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
         super.setClickable(true);
         this.context = context;
 
         init();
     }
-
-    protected void init() {
+    protected void init()
+    {
         matrix.setTranslate(1f, 1f);
         m = new float[9];
         setImageMatrix(matrix);
@@ -120,17 +128,21 @@ public class TouchImageView extends ImageView {
                             long pressTime = System.currentTimeMillis();
                             if (pressTime - lastPressTime <= DOUBLE_PRESS_INTERVAL) {
 
-                                if (saveScale == 1) {
+                                if (saveScale == 1)
+                                {
                                     matrix.postScale(maxScale / saveScale, maxScale / saveScale, start.x, start.y);
                                     saveScale = maxScale;
-                                } else {
+                                }
+                                else
+                                {
                                     matrix.postScale(minScale / saveScale, minScale / saveScale, width / 2, height / 2);
                                     saveScale = minScale;
                                 }
                                 calcPadding();
                                 checkAndSetTranslate(0, 0);
                                 lastPressTime = 0;
-                            } else {
+                            }
+                            else {
                                 lastPressTime = pressTime;
                             }
                             if (saveScale == minScale) {
@@ -156,20 +168,20 @@ public class TouchImageView extends ImageView {
 
                             long dragTime = System.currentTimeMillis();
 
-                            velocity = (float) distanceBetween(curr, last) / (dragTime - lastDragTime) * FRICTION;
+                            velocity = (float)distanceBetween(curr, last) / (dragTime - lastDragTime) * FRICTION;
                             lastDragTime = dragTime;
 
                             checkAndSetTranslate(deltaX, deltaY);
                             lastDelta.set(deltaX, deltaY);
                             last.set(curr.x, curr.y);
-                        } else if (mode == ZOOM) {
-                            double newDist = spacing(event);
+                        }
+                        else if (mode == ZOOM) {
+                            float newDist = spacing(event);
                             if (rawEvent.getPointerCount() < 2) break;
                             //There is one serious trouble: when you scaling with two fingers, then pick up first finger of gesture, ACTION_MOVE being called.
                             //Magic number 50 for this case
-                            if (10 > Math.abs(oldDist - newDist) || Math.abs(oldDist - newDist) > 50)
-                                break;
-                            double mScaleFactor = newDist / oldDist;
+                            if (10 > Math.abs(oldDist - newDist) || Math.abs(oldDist - newDist) > 50) break;
+                            float mScaleFactor = newDist / oldDist;
                             oldDist = newDist;
 
                             float origScale = saveScale;
@@ -184,7 +196,7 @@ public class TouchImageView extends ImageView {
 
                             calcPadding();
                             if (origWidth * saveScale <= width || origHeight * saveScale <= height) {
-                                matrix.postScale((float)mScaleFactor, (float)mScaleFactor, width / 2, height / 2);
+                                matrix.postScale(mScaleFactor, mScaleFactor, width / 2, height / 2);
                                 if (mScaleFactor < 1) {
                                     fillMatrixXY();
                                     if (mScaleFactor < 1) {
@@ -193,7 +205,7 @@ public class TouchImageView extends ImageView {
                                 }
                             } else {
                                 PointF mid = midPointF(event);
-                                matrix.postScale((float)mScaleFactor, (float)mScaleFactor, mid.x, mid.y);
+                                matrix.postScale(mScaleFactor, mScaleFactor, mid.x, mid.y);
                                 fillMatrixXY();
                                 if (mScaleFactor < 1) {
                                     if (matrixX < -right)
@@ -218,7 +230,8 @@ public class TouchImageView extends ImageView {
         });
     }
 
-    public boolean pagerCanScroll() {
+    public boolean pagerCanScroll()
+    {
         return saveScale == minScale;
     }
 
@@ -227,7 +240,8 @@ public class TouchImageView extends ImageView {
         super.onDraw(canvas);
         if (!allowInert) return;
         final float deltaX = lastDelta.x * velocity, deltaY = lastDelta.y * velocity;
-        if (deltaX > width || deltaY > height) {
+        if (deltaX > width || deltaY > height)
+        {
             return;
         }
         velocity *= FRICTION;
@@ -236,7 +250,8 @@ public class TouchImageView extends ImageView {
         setImageMatrix(matrix);
     }
 
-    private void checkAndSetTranslate(float deltaX, float deltaY) {
+    private void checkAndSetTranslate(float deltaX, float deltaY)
+    {
         float scaleWidth = Math.round(origWidth * saveScale);
         float scaleHeight = Math.round(origHeight * saveScale);
         fillMatrixXY();
@@ -266,52 +281,51 @@ public class TouchImageView extends ImageView {
         matrix.postTranslate(deltaX, deltaY);
         checkSiding();
     }
-
-    private void checkSiding() {
+    private void checkSiding()
+    {
         fillMatrixXY();
         //Log.d(TAG, "x: " + matrixX + " y: " + matrixY + " left: " + right / 2 + " top:" + bottom / 2);
         float scaleWidth = Math.round(origWidth * saveScale);
         float scaleHeight = Math.round(origHeight * saveScale);
         onLeftSide = onRightSide = onTopSide = onBottomSide = false;
-        if (-matrixX < 10.0f) onLeftSide = true;
+        if (-matrixX < 10.0f ) onLeftSide = true;
         else if (Math.abs(-matrixX + width - scaleWidth) < 10.0f) onRightSide = true;
         if (-matrixY < 10.0f) onTopSide = true;
         else if (Math.abs(-matrixY + height - scaleHeight) < 10.0f) onBottomSide = true;
     }
-
-    private void calcPadding() {
+    private void calcPadding()
+    {
         right = width * saveScale - width - (2 * redundantXSpace * saveScale);
         bottom = height * saveScale - height - (2 * redundantYSpace * saveScale);
     }
-
-    private void fillMatrixXY() {
+    private void fillMatrixXY()
+    {
         matrix.getValues(m);
         matrixX = m[Matrix.MTRANS_X];
         matrixY = m[Matrix.MTRANS_Y];
     }
-
-    private void scaleMatrixToBounds() {
+    private void scaleMatrixToBounds()
+    {
         if (Math.abs(matrixX + right / 2) > 0.5f)
             matrix.postTranslate(-(matrixX + right / 2), 0);
         if (Math.abs(matrixY + bottom / 2) > 0.5f)
             matrix.postTranslate(0, -(matrixY + bottom / 2));
     }
-
     @Override
     public void setImageBitmap(Bitmap bm) {
         super.setImageBitmap(bm);
         bmWidth = bm.getWidth();
         bmHeight = bm.getHeight();
     }
-
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec)
+    {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
         //Fit to screen.
         float scale;
-        float scaleX = width / bmWidth;
+        float scaleX =  width / bmWidth;
         float scaleY = height / bmHeight;
         scale = Math.min(scaleX, scaleY);
         matrix.setScale(scale, scale);
@@ -320,10 +334,10 @@ public class TouchImageView extends ImageView {
         saveScale = 1f;
 
         // Center the image
-        redundantYSpace = height - (scale * bmHeight);
+        redundantYSpace = height - (scale * bmHeight) ;
         redundantXSpace = width - (scale * bmWidth);
-        redundantYSpace /= (float) 2;
-        redundantXSpace /= (float) 2;
+        redundantYSpace /= (float)2;
+        redundantXSpace /= (float)2;
 
         matrix.postTranslate(redundantXSpace, redundantYSpace);
 
@@ -333,30 +347,25 @@ public class TouchImageView extends ImageView {
         setImageMatrix(matrix);
     }
 
-    private double distanceBetween(PointF left, PointF right) {
+    private double distanceBetween(PointF left, PointF right)
+    {
         return Math.sqrt(Math.pow(left.x - right.x, 2) + Math.pow(left.y - right.y, 2));
     }
-
-    /**
-     * Determine the space between the first two fingers
-     */
-    private double spacing(WrapMotionEvent event) {
+    /** Determine the space between the first two fingers */
+    private float spacing(WrapMotionEvent event) {
         // ...
         float x = event.getX(0) - event.getX(1);
         float y = event.getY(0) - event.getY(1);
-        return Math.sqrt(x * x + y * y);
+        return FloatMath.sqrt(x * x + y * y);
     }
 
-    /**
-     * Calculate the mid point of the first two fingers
-     */
+    /** Calculate the mid point of the first two fingers */
     private void midPoint(PointF point, WrapMotionEvent event) {
         // ...
         float x = event.getX(0) + event.getX(1);
         float y = event.getY(0) + event.getY(1);
         point.set(x / 2, y / 2);
     }
-
     private PointF midPointF(WrapMotionEvent event) {
         // ...
         float x = event.getX(0) + event.getX(1);

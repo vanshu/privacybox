@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dip">
+    android:padding="10dip" >
 
     <TextView
         android:id="@+id/text"
@@ -13,7 +13,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
 
         <ProgressBar
             android:id="@+id/progress"
@@ -26,12 +26,12 @@
         <TextView
             android:id="@+id/progress_text"
             style="@style/TextAppearance.Small"
+            android:textColor="@android:color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:paddingTop="8dip"
-            android:text="0%"
-            android:textColor="@android:color/black" />
+            android:text="0%" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <tech-list>
         <tech>android.nfc.tech.NfcVF</tech>
     </tech-list>
@@ -37,7 +37,8 @@
         <tech>android.nfc.tech.NfcBarcode</tech>
     </tech-list>
 
-</resources><!--
+</resources>
+<!--
     切勿写成这样子，表示必须适配所有TECH标签才能触发.
 	 <tech-list>
         <tech>android.nfc.tech.IsoDep</tech>
@@ -49,9 +50,7 @@
         <tech>android.nfc.tech.NdefFormatable</tech>
         <tech>android.nfc.tech.MifareClassic</tech>
         <tech>android.nfc.tech.MifareUltralight</tech>
-    </tech-list>
-
-
+    </tech-list>
 -->
 
 

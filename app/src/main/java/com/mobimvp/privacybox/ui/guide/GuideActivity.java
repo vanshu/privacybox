@@ -22,20 +22,14 @@ import com.mobimvp.privacybox.ui.BaseActivity;
 import com.mobimvp.privacybox.utility.SystemInfo;
 
 public class GuideActivity extends BaseActivity implements OnClickListener {
-    private Button btnNfc;
-    private Button btnWearable;
-    private Button btnDialphone;
-    private Button btnNosetting;
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            finish();
-        }
-    };
+	private Button btnNfc;
+	private Button btnWearable;
+	private Button btnDialphone;
+	private Button btnNosetting;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 //		setContentView(R.layout.guide);
 //		getPrivacyActionBar().setLogo(R.drawable.logo);
 //		getPrivacyActionBar().setDisplayShowTitleEnabled(false);
@@ -49,87 +43,94 @@ public class GuideActivity extends BaseActivity implements OnClickListener {
 //		btnDialphone.setOnClickListener(this);
 //		btnNosetting.setOnClickListener(this);
 //		registerfinishActivity();
-        noSetting();
-    }
+		noSetting();
+	}
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_nfc:
-                NFCUnlock();
-                break;
-            case R.id.btn_wearable:
-                wearableUnlock();
-                break;
-            case R.id.btn_dialphone:
-                dialPhoneUnlock();
-                break;
-            case R.id.btn_nosetting:
-                noSetting();
-                break;
-            default:
-                break;
-        }
-    }
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btn_nfc:
+			NFCUnlock();
+			break;
+		case R.id.btn_wearable:
+			wearableUnlock();
+			break;
+		case R.id.btn_dialphone:
+			dialPhoneUnlock();
+			break;
+		case R.id.btn_nosetting:
+			noSetting();
+			break;
+		default:
+			break;
+		}
+	}
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterfinishActivity();
-    }
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterfinishActivity();
+	}
 
-    public void dialPhoneUnlock() {
-        Intent intent = new Intent();
-        intent.setClass(GuideActivity.this, DialPhoneGuideActivity.class);
-        startActivity(intent);
-    }
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			finish();
+		}
+	};
 
-    public void wearableUnlock() {
+	public void dialPhoneUnlock() {
+		Intent intent = new Intent();
+		intent.setClass(GuideActivity.this, DialPhoneGuideActivity.class);
+		startActivity(intent);
+	}
+
+	public void wearableUnlock() {
 //		Intent intent = new Intent();
 //		intent.setClass(GuideActivity.this, WearableGuideActivity.class);
 //		startActivity(intent);
-    }
+	}
 
-    public void noSetting() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.edit().putString(Constants.PRIVACY_UNLOCKMODE, "0").commit();
-        Intent intent = new Intent();
-        intent.setAction(Constants.BROADCAST_FIRST_TRAIN);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-        finish();
-    }
+	public void noSetting() {
+		SharedPreferences preferences=PreferenceManager.getDefaultSharedPreferences(this);
+		preferences.edit().putString(Constants.PRIVACY_UNLOCKMODE, "0").commit();
+		Intent intent = new Intent();
+		intent.setAction(Constants.BROADCAST_FIRST_TRAIN);
+		LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+		finish();
+	}
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void NFCUnlock() {
-        switch (SystemInfo.getNFCStatus(GuideActivity.this)) {
-            case SystemInfo.DEVICE_NO_NFC:
-                Toast.makeText(getApplicationContext(), getString(R.string.cellphone_unsupport_nfc),
-                        Toast.LENGTH_SHORT).show();
-                break;
-            case SystemInfo.DEVICE_NFC_DISABLE:
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    Toast.makeText(getApplicationContext(), getString(R.string.open_nfc_function_tips),
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
-                }
-                break;
-            case SystemInfo.DEVICE_NFC_ENABLE:
-                Intent intent = new Intent();
-                intent.setClass(GuideActivity.this, NFCGuideActivity.class);
-                startActivity(intent);
-                break;
-        }
-    }
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+	public void NFCUnlock() {
+		switch (SystemInfo.getNFCStatus(GuideActivity.this)) {
+		case SystemInfo.DEVICE_NO_NFC:
+			Toast.makeText(getApplicationContext(), getString(R.string.cellphone_unsupport_nfc),
+					Toast.LENGTH_SHORT).show();
+			break;
+		case SystemInfo.DEVICE_NFC_DISABLE:
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+				Toast.makeText(getApplicationContext(), getString(R.string.open_nfc_function_tips),
+						Toast.LENGTH_SHORT).show();
+			} else {
+				startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
+			}
+			break;
+		case SystemInfo.DEVICE_NFC_ENABLE:
+			Intent intent = new Intent();
+			intent.setClass(GuideActivity.this, NFCGuideActivity.class);
+			startActivity(intent);
+			break;
+		}
+	}
 
-    public void registerfinishActivity() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Constants.BROADCAST_CLOSE_GUIDEACTIVITY);
-        LocalBroadcastManager.getInstance(this).registerReceiver(receiver,
-                filter);
-    }
+	public void registerfinishActivity() {
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.BROADCAST_CLOSE_GUIDEACTIVITY);
+		LocalBroadcastManager.getInstance(this).registerReceiver(receiver,
+				filter);
+	}
 
-    private void unregisterfinishActivity() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
-    }
+	private void unregisterfinishActivity() {
+		LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+	}
 }

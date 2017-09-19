@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2008 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -17,10 +18,11 @@
     android:id="@+id/text1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:ellipsize="marquee"
-    android:gravity="center_vertical"
     android:minHeight="44dip"
+    android:textAppearance="@style/TextAppearance.Medium"
+    android:textColor="@color/textcolor_white"
+    android:gravity="center_vertical"
     android:paddingLeft="12dip"
     android:paddingRight="7dip"
-    android:textAppearance="@style/TextAppearance.Medium"
-    android:textColor="@color/textcolor_white" />
+    android:ellipsize="marquee"
+/>

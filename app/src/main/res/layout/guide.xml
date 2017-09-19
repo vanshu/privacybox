@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <Button
         android:id="@+id/btn_nfc"
@@ -22,8 +22,9 @@
         android:layout_weight="1"
         android:background="@drawable/btn_light_gray"
         android:drawableLeft="@drawable/ic_wearable"
-        android:text="@string/wearable_unlock"
-        android:visibility="gone"></Button>
+        android:visibility="gone"
+        android:text="@string/wearable_unlock" >
+    </Button>
 
     <Button
         android:id="@+id/btn_dialphone"
@@ -33,8 +34,9 @@
         android:layout_weight="1"
         android:background="@drawable/btn_light_purple"
         android:drawableLeft="@drawable/ic_dial_phone"
-        android:text="@string/dialphone_unlock"
-        android:visibility="gone"></Button>
+        android:visibility="gone"
+        android:text="@string/dialphone_unlock" >
+    </Button>
 
     <Button
         android:id="@+id/btn_nosetting"
@@ -44,6 +46,7 @@
         android:layout_weight="1"
         android:background="@drawable/btn_brown"
         android:drawableLeft="@drawable/ic_no_setting"
-        android:text="@string/no_setting"></Button>
+        android:text="@string/no_setting" >
+    </Button>
 
 </LinearLayout>

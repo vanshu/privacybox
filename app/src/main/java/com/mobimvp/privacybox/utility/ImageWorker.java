@@ -16,6 +16,8 @@
 
 package com.mobimvp.privacybox.utility;
 
+import java.lang.ref.WeakReference;
+
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Resources;
@@ -28,8 +30,6 @@ import android.graphics.drawable.TransitionDrawable;
 import android.support.v4.util.LruCache;
 import android.widget.ImageView;
 
-import java.lang.ref.WeakReference;
-
 /**
  * This class wraps up completing some arbitrary long running work when loading a bitmap to an
  * ImageView. It handles things like using a memory and disk cache, running the work in a background
@@ -38,79 +38,32 @@ import java.lang.ref.WeakReference;
 public abstract class ImageWorker {
     private static final String TAG = "ImageWorker";
     private static final int FADE_IN_TIME = 200;
-    private final Object mPauseWorkLock = new Object();
-    protected boolean mPauseWork = false;
-    protected Resources mResources;
+
     private LruCache<Object, Bitmap> mImageCache;
     private Bitmap mLoadingBitmap;
     private boolean mFadeInBitmap = true;
     private boolean mExitTasksEarly = false;
+    protected boolean mPauseWork = false;
+    private final Object mPauseWorkLock = new Object();
+
+    protected Resources mResources;
 
     public ImageWorker(Context context) {
         mResources = context.getResources();
-
-        final int memClass = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
-        final int cacheSize = 1024 * 1024 * memClass / 8;
-        mImageCache = new LruCache<Object, Bitmap>(cacheSize) {
-
-            @Override
-            protected int sizeOf(Object key, Bitmap value) {
-                return value.getRowBytes() * value.getHeight();
-            }
-        };
+        
+	    final int memClass = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
+	    final int cacheSize = 1024 * 1024 * memClass / 8;
+	    mImageCache = new LruCache<Object, Bitmap>(cacheSize) {
+	    	
+			@Override
+			protected int sizeOf(Object key, Bitmap value) {
+				return value.getRowBytes() * value.getHeight();
+			}
+	    };
     }
-
-    /**
-     * Cancels any pending work attached to the provided ImageView.
-     *
-     * @param imageView
-     */
-    public static void cancelWork(ImageView imageView) {
-        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
-        if (bitmapWorkerTask != null) {
-            bitmapWorkerTask.cancel(true);
-        }
-    }
-
-    /**
-     * Returns true if the current work has been canceled or if there was no work in
-     * progress on this image view.
-     * Returns false if the work in progress deals with the same data. The work is not
-     * stopped in that case.
-     */
-    public static boolean cancelPotentialWork(Object data, ImageView imageView) {
-        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
-
-        if (bitmapWorkerTask != null) {
-            final Object bitmapData = bitmapWorkerTask.data;
-            if (bitmapData == null || !bitmapData.equals(data)) {
-                bitmapWorkerTask.cancel(true);
-            } else {
-                // The same work is already in progress.
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * @param imageView Any imageView
-     * @return Retrieve the currently active work task (if any) associated with this imageView.
-     * null if there is no such task.
-     */
-    private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
-        if (imageView != null) {
-            final Drawable drawable = imageView.getDrawable();
-            if (drawable instanceof AsyncDrawable) {
-                final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
-                return asyncDrawable.getBitmapWorkerTask();
-            }
-        }
-        return null;
-    }
-
+    
     public void recycle() {
-        mImageCache.evictAll();
+    	mImageCache.evictAll();
     }
 
     /**
@@ -121,7 +74,7 @@ public abstract class ImageWorker {
      * is set immediately, otherwise an {@link AsyncTask} will be created to asynchronously load the
      * bitmap.
      *
-     * @param data      The URL of the image to download.
+     * @param data The URL of the image to download.
      * @param imageView The ImageView to bind the downloaded image to.
      */
     public void loadImage(Object data, ImageView imageView) {
@@ -186,71 +139,65 @@ public abstract class ImageWorker {
      * example, you could resize a large bitmap here, or pull down an image from the network.
      *
      * @param data The data to identify which image to process, as provided by
-     *             {@link ImageWorker#loadImage(Object, ImageView)}
+     *            {@link ImageWorker#loadImage(Object, ImageView)}
      * @return The processed bitmap
      */
     protected abstract Bitmap processBitmap(Object data);
 
     /**
-     * Called when the processing is complete and the final bitmap should be set on the ImageView.
-     *
+     * Cancels any pending work attached to the provided ImageView.
      * @param imageView
-     * @param bitmap
      */
-    private void setImageBitmap(ImageView imageView, Bitmap bitmap) {
-        if (mFadeInBitmap) {
-            // Transition drawable with a transparent drwabale and the final bitmap
-            final TransitionDrawable td =
-                    new TransitionDrawable(new Drawable[]{
-                            new ColorDrawable(android.R.color.transparent),
-                            new BitmapDrawable(mResources, bitmap)
-                    });
-            // Set background to loading bitmap
-            imageView.setBackgroundDrawable(
-                    new BitmapDrawable(mResources, mLoadingBitmap));
-
-            imageView.setImageDrawable(td);
-            td.startTransition(FADE_IN_TIME);
-        } else {
-            imageView.setImageBitmap(bitmap);
-        }
-    }
-
-    public void setPauseWork(boolean pauseWork) {
-        synchronized (mPauseWorkLock) {
-            mPauseWork = pauseWork;
-            if (!mPauseWork) {
-                mPauseWorkLock.notifyAll();
-            }
+    public static void cancelWork(ImageView imageView) {
+        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
+        if (bitmapWorkerTask != null) {
+            bitmapWorkerTask.cancel(true);
         }
     }
 
     /**
-     * A custom Drawable that will be attached to the imageView while the work is in progress.
-     * Contains a reference to the actual worker task, so that it can be stopped if a new binding is
-     * required, and makes sure that only the last started worker process can bind its result,
-     * independently of the finish order.
+     * Returns true if the current work has been canceled or if there was no work in
+     * progress on this image view.
+     * Returns false if the work in progress deals with the same data. The work is not
+     * stopped in that case.
      */
-    private static class AsyncDrawable extends BitmapDrawable {
-        private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
+    public static boolean cancelPotentialWork(Object data, ImageView imageView) {
+        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
 
-        public AsyncDrawable(Resources res, Bitmap bitmap, BitmapWorkerTask bitmapWorkerTask) {
-            super(res, bitmap);
-            bitmapWorkerTaskReference =
-                    new WeakReference<BitmapWorkerTask>(bitmapWorkerTask);
+        if (bitmapWorkerTask != null) {
+            final Object bitmapData = bitmapWorkerTask.data;
+            if (bitmapData == null || !bitmapData.equals(data)) {
+                bitmapWorkerTask.cancel(true);
+            } else {
+                // The same work is already in progress.
+                return false;
+            }
         }
+        return true;
+    }
 
-        public BitmapWorkerTask getBitmapWorkerTask() {
-            return bitmapWorkerTaskReference.get();
+    /**
+     * @param imageView Any imageView
+     * @return Retrieve the currently active work task (if any) associated with this imageView.
+     * null if there is no such task.
+     */
+    private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
+        if (imageView != null) {
+            final Drawable drawable = imageView.getDrawable();
+            if (drawable instanceof AsyncDrawable) {
+                final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
+                return asyncDrawable.getBitmapWorkerTask();
+            }
         }
+        return null;
     }
 
     /**
      * The actual AsyncTask that will asynchronously process the image.
      */
     private class BitmapWorkerTask extends AsyncTask<Object, Void, Bitmap> {
-        private final WeakReference<ImageView> imageViewReference;
         private Object data;
+        private final WeakReference<ImageView> imageViewReference;
 
         public BitmapWorkerTask(ImageView imageView) {
             imageViewReference = new WeakReference<ImageView>(imageView);
@@ -269,8 +216,7 @@ public abstract class ImageWorker {
                 while (mPauseWork && !isCancelled()) {
                     try {
                         mPauseWorkLock.wait();
-                    } catch (InterruptedException e) {
-                    }
+                    } catch (InterruptedException e) {}
                 }
             }
 
@@ -340,6 +286,60 @@ public abstract class ImageWorker {
             }
 
             return null;
+        }
+    }
+
+    /**
+     * A custom Drawable that will be attached to the imageView while the work is in progress.
+     * Contains a reference to the actual worker task, so that it can be stopped if a new binding is
+     * required, and makes sure that only the last started worker process can bind its result,
+     * independently of the finish order.
+     */
+    private static class AsyncDrawable extends BitmapDrawable {
+        private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
+
+        public AsyncDrawable(Resources res, Bitmap bitmap, BitmapWorkerTask bitmapWorkerTask) {
+            super(res, bitmap);
+            bitmapWorkerTaskReference =
+                new WeakReference<BitmapWorkerTask>(bitmapWorkerTask);
+        }
+
+        public BitmapWorkerTask getBitmapWorkerTask() {
+            return bitmapWorkerTaskReference.get();
+        }
+    }
+
+    /**
+     * Called when the processing is complete and the final bitmap should be set on the ImageView.
+     *
+     * @param imageView
+     * @param bitmap
+     */
+    private void setImageBitmap(ImageView imageView, Bitmap bitmap) {
+        if (mFadeInBitmap) {
+            // Transition drawable with a transparent drwabale and the final bitmap
+            final TransitionDrawable td =
+                    new TransitionDrawable(new Drawable[] {
+                            new ColorDrawable(android.R.color.transparent),
+                            new BitmapDrawable(mResources, bitmap)
+                    });
+            // Set background to loading bitmap
+            imageView.setBackgroundDrawable(
+                    new BitmapDrawable(mResources, mLoadingBitmap));
+
+            imageView.setImageDrawable(td);
+            td.startTransition(FADE_IN_TIME);
+        } else {
+            imageView.setImageBitmap(bitmap);
+        }
+    }
+
+    public void setPauseWork(boolean pauseWork) {
+        synchronized (mPauseWorkLock) {
+            mPauseWork = pauseWork;
+            if (!mPauseWork) {
+                mPauseWorkLock.notifyAll();
+            }
         }
     }
 }

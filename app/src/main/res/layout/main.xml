@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:background="@color/background"
     android:fillViewport="true"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <Button
         android:id="@+id/app_lock"

@@ -2,14 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_selector_background">
+    android:background="@drawable/list_selector_background"
+     >
 
     <RelativeLayout
         android:id="@+id/thumbnail_container"
         android:layout_width="98dip"
         android:layout_height="98dip"
         android:layout_centerInParent="true"
-        android:background="@drawable/ic_folder_background">
+        android:background="@drawable/ic_folder_background" >
 
         <ImageView
             android:id="@+id/thumbnail"
@@ -27,7 +28,7 @@
             android:background="#40000000"
             android:orientation="vertical"
             android:paddingLeft="5dip"
-            android:paddingRight="1dip">
+            android:paddingRight="1dip" >
 
             <TextView
                 android:id="@+id/name"
@@ -68,13 +69,14 @@
 
     <CheckBox
         android:id="@+id/selected"
-        style="@style/CompoundButton.CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/thumbnail_container"
         android:layout_alignTop="@id/thumbnail_container"
+        android:focusable="false"
         android:clickable="false"
-        android:focusable="false" />
+        style="@style/CompoundButton.CheckBox"
+         />
 
     <TextView
         android:id="@+id/filename"
@@ -84,7 +86,7 @@
         android:layout_centerHorizontal="true"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="filename"
-        android:textColor="@color/textcolor_black" />
+        android:textColor="@color/textcolor_black"
+        android:text="filename" />
 
 </RelativeLayout>

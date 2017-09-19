@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_selector_background"
+    android:orientation="horizontal"
     android:clickable="true"
     android:focusable="true"
-    android:orientation="horizontal"
-    android:padding="5dip">
+    android:background="@drawable/list_selector_background"
+    android:padding="5dip" >
 
     <ImageView
         android:id="@+id/type"
@@ -20,17 +20,17 @@
         android:layout_width="0px"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_vertical" >
 
         <TextView
             android:id="@+id/name"
+            android:textColor="@color/textcolor_black"
             android:layout_width="wrap_content"
             android:layout_height="0px"
             android:layout_weight="1"
             android:lines="1"
             android:text="fileName"
-            android:textColor="@color/textcolor_black"
             android:textSize="16sp" />
 
         <TextView
@@ -45,10 +45,11 @@
 
     <CheckBox
         android:id="@+id/selected"
-        style="@style/CompoundButton.CheckBox"
         android:layout_width="36dip"
         android:layout_height="36dip"
         android:layout_gravity="center"
-        android:layout_marginLeft="5dp" />
+        style="@style/CompoundButton.CheckBox"
+        android:layout_marginLeft="5dp"
+         />
 
 </LinearLayout>

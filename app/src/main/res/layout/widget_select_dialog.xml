@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
 /* //device/apps/common/res/layout/select_dialog.xml
 **
 ** Copyright 2006, The Android Open Source Project
@@ -22,9 +23,9 @@
     This layout file is inflated and used as the ListView to display the items.
     Assign an ID so its state will be saved/restored.
 -->
-<view xmlns:android="http://schemas.android.com/apk/res/android"
+<view class="com.mobimvp.privacybox.ui.widgets.AlertController$RecycleListView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/select_dialog_listview"
-    class="com.mobimvp.privacybox.ui.widgets.AlertController$RecycleListView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginTop="5px"

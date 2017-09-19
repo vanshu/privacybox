@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobimvp.privacybox"
     android:versionCode="2"
-    android:versionName="1.0.1">
+    android:versionName="1.0.1" >
 
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="25" />
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.READ_LOGS" />  <!-- logcat -b events 所需要权限，不过4.1后非系统应用只能查询到自身log日志 -->
@@ -15,11 +15,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <!--
-    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
-     <uses-permission android:name="android.permission.NFC" />
-     -->
-
+   <!-- 
+   <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.NFC" />
+    --> 
+    
 
     <uses-feature
         android:name="android.hardware.nfc"
@@ -30,13 +30,13 @@
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/PRIVACYBOX_Theme">
+        android:theme="@style/PRIVACYBOX_Theme" >
         <activity
             android:name=".ui.LauncherActivity"
             android:excludeFromRecents="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoDisplay">
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -46,14 +46,15 @@
             android:name=".ui.guide.GuideActivity"
             android:excludeFromRecents="true"
             android:parentActivityName=".ui.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".ui.MainActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:logo="@drawable/logo"
             android:parentActivityName=".ui.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
@@ -62,8 +63,8 @@
             android:name=".ui.guide.NFCGuideActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
-            android:parentActivityName="com.mobimvp.privacybox.ui.guide.GuideActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.mobimvp.privacybox.ui.guide.GuideActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
@@ -71,7 +72,7 @@
         <activity
             android:name=".ui.guide.NFCBadgeActivity"
             android:excludeFromRecents="true"
-            android:theme="@android:style/Theme.NoDisplay">
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -80,7 +81,6 @@
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
@@ -88,7 +88,7 @@
         <activity
             android:name=".ui.guide.DialPhoneGuideActivity"
             android:excludeFromRecents="true"
-            android:parentActivityName="com.mobimvp.privacybox.ui.guide.GuideActivity">
+            android:parentActivityName="com.mobimvp.privacybox.ui.guide.GuideActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
@@ -118,7 +118,7 @@
             android:name=".ui.applock.LockSettingsActivity"
             android:excludeFromRecents="true"
             android:parentActivityName=".ui.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
@@ -128,7 +128,7 @@
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:parentActivityName=".ui.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
@@ -139,14 +139,12 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
-
         <service
             android:name=".service.AppLockService"
-            android:enabled="true"></service>
-        <receiver
-            android:name=".ui.guide.OutcallReceiver"
-            android:exported="true"> <!-- 默认为true, 如果设置exported为false，则外部程序无法导入 -->
-            <intent-filter android:priority="2147483647">
+            android:enabled="true" >
+        </service>
+        <receiver android:name=".ui.guide.OutcallReceiver" android:exported="true" > <!-- 默认为true, 如果设置exported为false，则外部程序无法导入 -->
+            <intent-filter android:priority="2147483647" >
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
         </receiver>

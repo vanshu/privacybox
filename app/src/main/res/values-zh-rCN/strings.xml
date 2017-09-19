@@ -23,8 +23,8 @@
     <string name="Privacy_lock_promptGraphTipShort">解锁图案过于简单</string>
     <string name="Privacy_lock_promptGraphTipNotConfirm">两次图案不一致，请再次绘制</string>
     <string name="Privacy_lock_promptGraphTipFailed">解锁失败，请重新绘制</string>
-    <string name="Privacy_lock_promptGraphTipAgain"> 重新设定解锁图案</string>
-
+     <string name="Privacy_lock_promptGraphTipAgain"> 重新设定解锁图案</string>
+      
     <string name="Privacy_lock_promptGraphFailed">%1$d次解锁失败，请在%2$d秒后重试</string>
     <string name="Privacy_lock_Settings">设置</string>
     <string name="Privacy_lock_Settings_Unlock">解锁设置</string>
@@ -70,15 +70,15 @@
     <string name="encryption_success_toast">已成功加密%1$d个文件</string>
     <string name="decryption_success_fail_toast">已成功解密%1$d个文件，%2$d个文件解密失败</string>
     <string name="decryption_success_toast">已成功解密%1$d个文件</string>
-
-
+ 
+    
     <!-- GuideActivity -->
     <string name="nfc_unlock">NFC解锁</string>
     <string name="dialphone_unlock"> 拨号解锁</string>
     <string name="wearable_unlock"> 穿戴式设备解锁</string>
     <string name="no_setting">暂不设置</string>
     <!-- NFCGuideActivity -->
-    <string name="hide_launcher_tips"> 自动隐藏桌面图标，通过NFC标签唤起进入程序</string>
+     <string name="hide_launcher_tips"> 自动隐藏桌面图标，通过NFC标签唤起进入程序</string>
     <string name="nfc_unlock_tips1">请将NFC标签贴近手机</string>
     <string name="nfc_unlock_tips2">请再次将NFC标签贴近手机</string>
     <string name="nfc_unlock_success"> NFC解锁设置成功!</string>

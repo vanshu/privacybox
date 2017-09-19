@@ -15,9 +15,9 @@
     <color name="light_purple_pressed">#733ad8</color>
     <color name="brown_pressed">#946225</color>
     <color name="brown_default">#b07833</color>
-    <color name="red_default">#e84c3d</color>
+    <color name="red_default"> #e84c3d</color>
     <color name="red_pressed">#c1392b</color>
-    <color name="gray_default">#ecf0f1</color>
+    <color name="gray_default"> #ecf0f1</color>
     <color name="gray_pressed">#bec3c7</color>
     <color name="divider_line">#e2e2e2</color>
     <color name="grid_mediafile_bg">#d8e8e7</color>
